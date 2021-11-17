@@ -1,0 +1,21 @@
+.comment {
+  border: 1px solid burlywood;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 20%;
+  margin: auto;
+  text-align: left;
+}
+
+button {
+  background-color: inherit;
+  color: antiquewhite;
+  border: 1px solid burlywood;
+  border-radius: 5px;
+  padding: 2px 4px;
+  margin-right: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}

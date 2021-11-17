@@ -1,0 +1,53 @@
+form {
+  margin-top: 20px;
+}
+
+.control {
+  margin-bottom: 10px;
+}
+
+.control textarea{
+  width: 400px;
+  height: 100px;
+  background-color: inherit;
+  border: 1px solid burlywood;
+  border-radius: 5px;
+  color: inherit;
+  padding: 5px 10px;
+}
+
+.control input {
+  background-color: inherit;
+  border: 1px solid burlywood;
+  border-radius: 5px;
+  padding:10px;
+  color: inherit;
+}
+
+input[type="submit"]:disabled {
+  background-color: #726d6d;
+  color:rgb(212, 208, 203)
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+.control.invalid textarea {
+  background-color: #634646;
+}
+
+.errorMsg {
+  border: 1px solid red;
+  width: 17%;
+  padding: 5px;
+  margin: auto;
+} 
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
