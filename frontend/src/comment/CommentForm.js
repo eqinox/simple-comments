@@ -23,6 +23,7 @@ const CommentForm = () => {
 
     if (text.trim().length === 0) {
       setError("field should not be empty");
+      setComment(text);
     } else if (text.length >= MAX_SYMBOLS) {
       setError(`The comment can contain maximum of ${MAX_SYMBOLS} symbols`);
     } else {
@@ -34,7 +35,7 @@ const CommentForm = () => {
   return (
     <form onSubmit={submitHandler}>
       <div className={`${classes.control} ${error ? classes.invalid : ""}`}>
-        <textarea onChange={commentHandler} />
+        <textarea onChange={commentHandler} value={comment} />
         <div
           className={`${classes.errorMsg} ${
             error ? classes.show : classes.hide

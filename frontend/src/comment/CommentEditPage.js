@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import classes from "./CommentEditPage.module.css";
 
@@ -6,17 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCommentById, editCommentById } from "../store/comment-actions";
 import { useHistory } from "react-router";
 
+const MAX_SYMBOLS = 100;
+
 const CommentEditPage = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const selectedComment = useSelector((state) => state.comment.selected);
-  let comment = useRef();
+  // let comment = useRef();
+  const [comment, setComment] = useState();
+  const [error, setError] = useState(false);
 
   // maybe there's better way
-  if (comment.current && selectedComment.comment) {
-    comment.current.value = selectedComment.comment;
-  }
+  // if (comment.current && selectedComment.comment) {
+  //   comment.current.value = selectedComment.comment;
+  // }
+
+  useEffect(() => {
+    setComment(selectedComment.comment);
+  }, [selectedComment.comment]);
 
   useEffect(() => {
     dispatch(getCommentById(props.match.params.id));
@@ -32,19 +40,36 @@ const CommentEditPage = (props) => {
     history.goBack();
   };
 
+  const commentHandler = (event) => {
+    event.preventDefault();
+    const text = event.target.value;
+
+    if (text.trim().length === 0) {
+      setError("field should not be empty");
+      setComment(text);
+    } else if (text.length >= MAX_SYMBOLS) {
+      setError(`The comment can contain maximum of ${MAX_SYMBOLS} symbols`);
+    } else {
+      setComment(text);
+      setError(false);
+    }
+  };
+
 
   return (
     <form onSubmit={submitHandler}>
-      <div className={`${classes.control}`}>
-        <textarea ref={comment} />
+      <div className={`${classes.control} ${error ? classes.invalid : ""}`}>
+        <textarea onChange={commentHandler} value={comment} />
         <div
-          className={`${classes.errorMsg} ${classes.hide}`}
+          className={`${classes.errorMsg} ${
+            error ? classes.show : classes.hide
+          }`}
         >
-          error
+          {error}
         </div>
       </div>
       <div className={classes.control}>
-        <input type="submit"/>
+        <input type="submit" disabled={error ? "disabled" : false} />
       </div>
       <button onClick={backHandler}>Back</button>
     </form>
