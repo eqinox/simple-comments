@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Route, Switch } from "react-router-dom";
 import CommentPage from "./comment/CommentPage";
-import EditCommentPage from "./comment/CommentEditPage";
+import CommentEditPage from "./comment/CommentEditPage";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Route path="/" exact>
           <CommentPage />
         </Route>
-        <Route path="/comment/edit/:id" component={EditCommentPage} />
+        <Route path="/comment/edit/:id" component={CommentEditPage} />
       </Switch>
     </div>
   );

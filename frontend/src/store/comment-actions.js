@@ -102,7 +102,6 @@ export const getCommentById = (id) => {
       if (comment.error) {
         console.log(comment.error);
       } else {
-        console.log(comment);
         dispatch(commentActions.selectComment(comment));
       }
     } catch (error) {

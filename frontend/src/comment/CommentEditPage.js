@@ -11,28 +11,23 @@ const MAX_SYMBOLS = 100;
 const CommentEditPage = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  
   const selectedComment = useSelector((state) => state.comment.selected);
-  // let comment = useRef();
   const [comment, setComment] = useState();
   const [error, setError] = useState(false);
-
-  // maybe there's better way
-  // if (comment.current && selectedComment.comment) {
-  //   comment.current.value = selectedComment.comment;
-  // }
 
   useEffect(() => {
     setComment(selectedComment.comment);
   }, [selectedComment.comment]);
 
+  //whenever this executes then state.comment.selected will be changed.
   useEffect(() => {
     dispatch(getCommentById(props.match.params.id));
   }, [props.match.params.id]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(editCommentById(props.match.params.id, comment.current.value));
+    dispatch(editCommentById(props.match.params.id, comment));
   };
 
   const backHandler = (event) => {
@@ -54,8 +49,7 @@ const CommentEditPage = (props) => {
       setError(false);
     }
   };
-
-
+  
   return (
     <form onSubmit={submitHandler}>
       <div className={`${classes.control} ${error ? classes.invalid : ""}`}>

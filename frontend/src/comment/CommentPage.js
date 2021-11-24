@@ -18,7 +18,7 @@ const CommentPage = () => {
   return (
     <div>
       <CommentForm />
-      {allComments && <AllComments comments={allComments} />}
+      <AllComments comments={allComments} />
     </div>
   );
 };

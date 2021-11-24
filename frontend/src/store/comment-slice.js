@@ -29,7 +29,7 @@ const commentSlice = createSlice({
       if (comment) {
         const index = state.all.indexOf(comment);
         state.all.splice(index, 1);
-      }
+      } 
     },
     selectComment(state, action) {
       const comment = action.payload;
