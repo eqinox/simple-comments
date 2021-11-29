@@ -9,6 +9,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact>
+        one more
           <CommentPage />
         </Route>
         <Route path="/comment/edit/:id" component={CommentEditPage} />
