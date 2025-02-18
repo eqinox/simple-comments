@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import classes from "./CommentEditPage.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentById, editCommentById } from "../store/comment-actions";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
+import { useParams } from "react-router-dom";
 
 const MAX_SYMBOLS = 100;
 
-const CommentEditPage = (props) => {
-  const history = useHistory();
+const CommentEditPage = () => {
+  const history = useNavigate();
   const dispatch = useDispatch();
-  
+  const { id } = useParams();
+
   const selectedComment = useSelector((state) => state.comment.selected);
   const [comment, setComment] = useState();
   const [error, setError] = useState(false);
@@ -22,17 +24,17 @@ const CommentEditPage = (props) => {
 
   //whenever this executes then state.comment.selected will be changed.
   useEffect(() => {
-    dispatch(getCommentById(props.match.params.id));
-  }, [props.match.params.id]);
+    dispatch(getCommentById(id));
+  }, [id]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(editCommentById(props.match.params.id, comment));
+    dispatch(editCommentById(id, comment));
   };
 
   const backHandler = (event) => {
     event.preventDefault();
-    history.goBack();
+    history(-1);
   };
 
   const commentHandler = (event) => {
@@ -49,7 +51,7 @@ const CommentEditPage = (props) => {
       setError(false);
     }
   };
-  
+
   return (
     <form onSubmit={submitHandler}>
       <div className={`${classes.control} ${error ? classes.invalid : ""}`}>
