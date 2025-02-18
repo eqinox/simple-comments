@@ -4,7 +4,7 @@
 
 ## Frontend app
 
-- starts with "npm start"
+- starts with "npm run dev"
 - Adding/Deleting/Editting comments with React and Redux
 
 ## Server
